@@ -165,6 +165,9 @@
             bitrateInterval: 500,
             // By default, uploads are started automatically when adding files:
             autoUpload: true,
+            // By default, files are not posted as raw. 
+            // Warning: forces upload to take only single file even if more selected.
+            rawpost: false,
 
             // Error and info messages:
             messages: {
@@ -480,34 +483,38 @@
                         });
                     }
                 } else {
-                    if (that._isInstanceOf('FormData', options.formData)) {
-                        formData = options.formData;
+                    if (options.rawpost) {
+                        formData = options.blob || file;
                     } else {
-                        formData = new FormData();
-                        $.each(this._getFormData(options), function (index, field) {
-                            formData.append(field.name, field.value);
-                        });
-                    }
-                    if (options.blob) {
-                        formData.append(
-                            paramName,
-                            options.blob,
-                            file.uploadName || file.name
-                        );
-                    } else {
-                        $.each(options.files, function (index, file) {
-                            // This check allows the tests to run with
-                            // dummy objects:
-                            if (that._isInstanceOf('File', file) ||
-                                    that._isInstanceOf('Blob', file)) {
-                                formData.append(
-                                    ($.type(options.paramName) === 'array' &&
-                                        options.paramName[index]) || paramName,
-                                    file,
-                                    file.uploadName || file.name
-                                );
-                            }
-                        });
+                        if (that._isInstanceOf('FormData', options.formData)) {
+                            formData = options.formData;
+                        } else {
+                            formData = new FormData();
+                            $.each(this._getFormData(options), function (index, field) {
+                                formData.append(field.name, field.value);
+                            });
+                        }
+                        if (options.blob) {
+                            formData.append(
+                                paramName,
+                                options.blob,
+                                file.uploadName || file.name
+                            );
+                        } else {
+                            $.each(options.files, function (index, file) {
+                                // This check allows the tests to run with
+                                // dummy objects:
+                                if (that._isInstanceOf('File', file) ||
+                                        that._isInstanceOf('Blob', file)) {
+                                    formData.append(
+                                        ($.type(options.paramName) === 'array' &&
+                                            options.paramName[index]) || paramName,
+                                        file,
+                                        file.uploadName || file.name
+                                    );
+                                }
+                            });
+                        }
                     }
                 }
                 options.data = formData;
