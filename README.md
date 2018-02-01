@@ -44,6 +44,8 @@ Supports cross-domain, chunked and resumable file uploads and client-side image 
   Files can be uploaded as standard "multipart/form-data" or file contents stream (HTTP PUT file upload).
 * **Compatible with any server-side application platform:**  
   Works with any server-side platform (PHP, Python, Ruby on Rails, Java, Node.js, Go etc.) that supports standard HTML form file uploads.
+* **Raw file data upload:**
+  Usable for making uploads to 3rd party services that need raw data in POST - like AWS S3 presigned urls.
 
 ## Requirements
 
