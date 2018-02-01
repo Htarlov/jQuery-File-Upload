@@ -2,7 +2,7 @@
 
 ## Fork information
 
-This is a fork of original [jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload/) version 9.20.0 done at 02.01.2018 with one small change - it allows for raw file upload. Done solely for purpose of uploading to AWS S3 presigned urls.
+This is a fork of original [jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload/) version 9.20.0 done at 01.02.2018 with one small change - it allows for raw file upload. Done solely for purpose of uploading to AWS S3 presigned urls.
 
 ## Demo
 [Demo File Upload](https://blueimp.github.io/jQuery-File-Upload/)
